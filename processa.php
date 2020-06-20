@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include 'conecta.php';
 
     $email = $_POST['email']; 
@@ -13,8 +14,12 @@
     $resultado_usuario = mysqli_fetch_assoc($resultado);
     
     if ($registros == 1) {
-        header('Location: restrita.php');
+        
+        $_SESSION['id'] = $resultado_usuario['id'];
+        $_SESSION['nome'] = $resultado_usuario['nome'];
+        $_SESSION['email'] = $resultado_usuario['email'];
 
+        header('Location: restrita.php');
     }else{
         header('Location: index.html');
     }
